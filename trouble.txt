@@ -1,0 +1,27 @@
+#install mysql
+1.安装mysql使用的yum,使用root启动服务后发现mysql少几个库(eg:mysql,user...)
+  解决:删除/var/lib/mysql/下的所有文件,重启mysql服务
+2.修改初始化密码,初次启动mysql必须修改密码才可以使用,修改密码提示密码复杂度低不安全
+  解决:修改密码的权限级别
+       [查看密码规则]
+	   SHOW VARIABLES LIKE 'validate_password%';
+	   [修改认证级别]
+	   set global validate_password_length=4; //密码长度
+	   set global validate_password_policy=0; //验证策略
+
+#创建aiohttp骨架
+1.创建GET请求index不能在页面显示,而是下载文件(docker环境)
+  解决:修改
+	web.Response(body=b'<h1>yi giao wo li giao giao!!</h1>')
+	添加参数:content_type='text/html'
+  
+#实现外网反向代理(内网穿透)
+1.我使用的时阿里的natapp 可以上网查查 使用很简单(主要免费)
+
+#实现ORM
+1.在ormClass.py中实现相关增删改查时有关 @classmethod 的使用
+  [目的] 查询使用可以实现根据查询结果动态创建对象
+  @classmethod 将函数定义为类成员,此时第一个参数应该是cls(注意不是self) -- 对比@staticmethod未看
+
+#实现web访问
+1.if param.kind == inspect.Parameter.VAR_KEYWORD 这个判断有问题但是不知为啥(待研究)
